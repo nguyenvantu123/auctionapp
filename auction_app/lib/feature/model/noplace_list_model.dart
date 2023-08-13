@@ -9,7 +9,7 @@ class NoPlaceListModel {
 
   String searchQuery;
 
-  List<NoPlaceModel> listViewBienSo;
+  List<NoPlaceModel> listViewBienSo = [];
 
   NoPlaceListModel(
       {required this.currentPage,
@@ -24,7 +24,7 @@ class NoPlaceListModel {
         pageCount: json['pageCount'],
         rowCout: json['rowCout'],
         searchQuery: json['searchQuery'],
-        listViewBienSo: json['listViewBienSo']);
+        listViewBienSo: NoPlaceModel.getListFromJson(json['listViewBienSo']));
   }
 
   Map<String, dynamic> toJson() => {

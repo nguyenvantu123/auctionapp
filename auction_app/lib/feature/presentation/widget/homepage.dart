@@ -1,150 +1,419 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'dart:io';
+
+import 'package:auction_app/feature/model/noplace_model.dart';
 import 'package:auction_app/feature/presentation/controller/home_page_controller.dart';
+import 'package:auction_app/feature/presentation/shared/loading_page.dart';
 import 'package:auction_app/flutx/theme/app_theme.dart';
+import 'package:auction_app/loading_effect.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
+import 'package:number_paginator/number_paginator.dart';
 
 class HomepageWidget extends StatefulWidget {
-  const HomepageWidget({super.key});
+  const HomepageWidget({Key? key}) : super(key: key);
 
   @override
-  State<HomepageWidget> createState() => _HomepageWidgetState();
+  // ignore: library_private_types_in_public_api
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomepageWidgetState extends State<HomepageWidget> {
+class _HomeScreenState extends State<HomepageWidget> {
   late ThemeData theme;
-  late HomePageController controller;
+  late CustomTheme customTheme;
+
+  late HomePageController homeController;
 
   @override
   void initState() {
     super.initState();
-    theme = AppTheme.nftTheme;
-    controller = FxControllerStore.putOrFind(HomePageController());
+    homeController =
+        FxControllerStore.putOrFind<HomePageController>(HomePageController());
+    theme = AppTheme.theme;
+    customTheme = AppTheme.customTheme;
+  }
+
+  List<Widget> _buildNoPlaceList() {
+    List<Widget> list = [];
+
+    if (homeController.noplaces!.isNotEmpty) {
+      for (NoPlaceModel shop in homeController.noplaces!) {
+        list.add(_buildNoPlace(shop));
+      }
+    }
+
+    return list;
+  }
+
+  List<Widget> _buildNoHaveList() {
+    List<Widget> list = [];
+
+    list.add(FxText.labelLarge("Không có dữ liệu"));
+
+    return list;
+  }
+
+  Widget _buildNoPlace(NoPlaceModel shop) {
+    return FxContainer(
+      margin: FxSpacing.bottom(16),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FxText.bodyLarge(
+                      shop.bienSo.substring(0, 3) +
+                          " - " +
+                          shop.bienSo.substring(3, 6) +
+                          "." +
+                          shop.bienSo.substring(6, 8),
+                      fontWeight: 600,
+                    ),
+                    IconButton(
+                        icon: Icon(FeatherIcons.heart),
+                        color: customTheme.homemadePrimary,
+                        onPressed: () => {}),
+                  ],
+                ),
+                FxSpacing.height(8),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.location_on_outlined,
+                      color: theme.colorScheme.onBackground.withAlpha(140),
+                      size: 16,
+                    ),
+                    FxSpacing.width(8),
+                    Expanded(
+                        child: FxText.bodySmall(
+                      shop.tenTinh,
+                      xMuted: true,
+                    )),
+                  ],
+                ),
+                FxSpacing.height(6),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.car_rental,
+                      color: theme.colorScheme.onBackground.withAlpha(140),
+                      size: 16,
+                    ),
+                    FxSpacing.width(8),
+                    Expanded(
+                        child: FxText.bodySmall(
+                      shop.tenLoai,
+                      xMuted: true,
+                    )),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _endDrawer() {
+    return SafeArea(
+      child: Container(
+        margin: FxSpacing.fromLTRB(16, 16, 50, 80),
+        width: 300,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          color: customTheme.card,
+        ),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Drawer(
+          child: Container(
+            color: customTheme.card,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: FxSpacing.xy(16, 12),
+                  color: customTheme.homemadePrimary,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: FxText(
+                            "Tìm kiếm nâng cao",
+                            fontWeight: 700,
+                            color: customTheme.homemadeOnPrimary,
+                          ),
+                        ),
+                      ),
+                      FxContainer.rounded(
+                          onTap: () {
+                            homeController.closeEndDrawer();
+                          },
+                          paddingAll: 6,
+                          color: customTheme.homemadeOnPrimary.withAlpha(80),
+                          child: Icon(
+                            FeatherIcons.x,
+                            size: 12,
+                            color: customTheme.homemadeOnPrimary,
+                          ))
+                    ],
+                  ),
+                ),
+                Expanded(
+                    child: ListView(
+                  padding: FxSpacing.all(16),
+                  children: [
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FxText.bodyMedium(
+                            "Thành phố",
+                            color: theme.colorScheme.onBackground,
+                            fontWeight: 600,
+                          ),
+                          FxText.bodySmall(
+                            "${homeController.selectedChoices.length} selected",
+                            color: theme.colorScheme.onBackground,
+                            fontWeight: 600,
+                            xMuted: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    FxSpacing.height(16),
+                    Container(
+                      child: Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children: _buildType(),
+                      ),
+                    ),
+                    FxSpacing.height(24),
+                  ],
+                )),
+                Row(
+                  children: [
+                    Expanded(
+                        child: FxContainer(
+                      onTap: () {
+                        homeController.clearDrawer();
+                      },
+                      padding: FxSpacing.y(12),
+                      child: Center(
+                        child: FxText(
+                          "Xoá bộ lọc",
+                          color: customTheme.homemadeSecondary,
+                          fontWeight: 600,
+                        ),
+                      ),
+                    )),
+                    Expanded(
+                        child: FxContainer.none(
+                      onTap: () {
+                        homeController.closeEndDrawer();
+                      },
+                      padding: FxSpacing.y(12),
+                      color: customTheme.homemadePrimary,
+                      child: Center(
+                        child: FxText(
+                          "Áp dụng",
+                          color: customTheme.homemadeOnPrimary,
+                          fontWeight: 600,
+                        ),
+                      ),
+                    )),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildType() {
+    List<String> categoryList = [];
+
+    List<Widget> choices = [];
+    if (homeController.citymodels!.isEmpty) {
+      return choices;
+    }
+
+    homeController.citymodels?.forEach((element) {
+      categoryList.add(element.tenTinh);
+    });
+
+    for (var item in categoryList) {
+      bool selected = homeController.selectedChoices.contains(item);
+      if (selected) {
+        choices.add(FxContainer.none(
+            color: customTheme.homemadePrimary.withAlpha(28),
+            bordered: true,
+            borderRadiusAll: 12,
+            paddingAll: 8,
+            border: Border.all(color: customTheme.homemadePrimary),
+            onTap: () {
+              homeController.removeChoice(item);
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.check,
+                  size: 14,
+                  color: customTheme.homemadePrimary,
+                ),
+                FxSpacing.width(6),
+                FxText.bodySmall(
+                  item,
+                  fontSize: 11,
+                  color: customTheme.homemadePrimary,
+                )
+              ],
+            )));
+      } else {
+        choices.add(FxContainer.none(
+          color: customTheme.border,
+          borderRadiusAll: 12,
+          padding: FxSpacing.xy(12, 8),
+          onTap: () {
+            homeController.addChoice(item);
+          },
+          child: FxText.labelSmall(
+            item,
+            color: theme.colorScheme.onBackground,
+            fontSize: 11,
+          ),
+        ));
+      }
+    }
+    return choices;
   }
 
   @override
   Widget build(BuildContext context) {
     return FxBuilder<HomePageController>(
-        controller: controller,
-        theme: theme,
-        builder: (controller) {
-          return Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: Padding(
-                padding: FxSpacing.fromLTRB(
-                    20, FxSpacing.safeAreaTop(context) + 40, 20, 0),
-                child: Center(
-                    child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const SizedBox(width: 20.0, height: 100.0),
-                    const Text(
-                      'Be',
-                      style: TextStyle(fontSize: 43.0),
-                    ),
-                    const SizedBox(width: 20.0, height: 100.0),
-                    DefaultTextStyle(
-                      style: const TextStyle(
-                        fontSize: 40.0,
-                        fontFamily: 'Horizon',
-                      ),
-                      child: AnimatedTextKit(animatedTexts: [
-                        RotateAnimatedText('AWESOME'),
-                        RotateAnimatedText('OPTIMISTIC'),
-                        RotateAnimatedText('DIFFERENT'),
-                      ]),
-                    ),
-                  ],
-                )),
-              ));
+        controller: homeController,
+        builder: (homeController) {
+          return _buildBody();
         });
   }
-}
 
-class SelectableList extends StatefulWidget {
-  const SelectableList({super.key});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _SelectableListState createState() => _SelectableListState();
-}
-
-class _SelectableListState extends State<SelectableList> {
-  final List<int> _list = List.generate(20, (i) => i);
-  final List<bool> _selected = List.generate(20, (i) => false);
-  late ThemeData theme;
-  bool _isSelectable = false;
-  late CustomTheme customTheme;
-
-  @override
-  void initState() {
-    super.initState();
-    theme = AppTheme.theme;
-    customTheme = AppTheme.customTheme;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildBody() {
     return Scaffold(
-        body: ListView.separated(
-            itemCount: _list.length,
-            itemBuilder: (context, index) {
-              return Ink(
-                color: _selected[index]
-                    ? theme.colorScheme.primary
-                    : theme.colorScheme.background,
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: _selected[index]
-                        ? theme.colorScheme.secondary
-                        : theme.colorScheme.secondary.withAlpha(240),
-                    child: _selected[index]
-                        ? Icon(
-                            Icons.done,
-                            color: theme.colorScheme.onSecondary,
-                          )
-                        : FxText.bodyLarge(_list[index].toString(),
-                            fontWeight: 600,
-                            color: _selected[index]
-                                ? theme.colorScheme.onPrimary
-                                : theme.colorScheme.onSecondary),
-                  ),
-                  subtitle: FxText.bodyMedium('Sub Item',
-                      fontWeight: 500,
-                      color: _selected[index]
-                          ? theme.colorScheme.onPrimary
-                          : theme.colorScheme.onBackground),
-                  title: FxText.bodyLarge('Item - ${_list[index]}',
-                      fontWeight: 600,
-                      color: _selected[index]
-                          ? theme.colorScheme.onPrimary
-                          : theme.colorScheme.onBackground),
-                  onTap: () => {
-                    if (_isSelectable)
-                      {
-                        setState(() {
-                          _selected[index] = !_selected[index];
-                        })
-                      },
-                    if (!_selected.contains(true))
-                      {
-                        setState(() {
-                          _isSelectable = false;
-                        })
-                      }
+        key: homeController.scaffoldKey,
+        endDrawer: _endDrawer(),
+        resizeToAvoidBottomInset: false,
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 60, 24, 64),
+          child: Column(children: [
+            Row(
+              children: [
+                Expanded(
+                    child: TextFormField(
+                  onFieldSubmitted: (value) {
+                    setState(() {
+                      homeController.showLoading = true;
+                      homeController.searchList(
+                          value, homeController.idToChoices.join(","));
+                    });
                   },
-                  onLongPress: (() => setState(() => {
-                        if (_isSelectable)
-                          {_selected[index] = true}
-                        else
-                          {_isSelectable = true, _selected[index] = true}
-                      })),
-                ),
-              );
-            },
-            separatorBuilder: (_, __) => Divider(
-                  height: 0.5,
-                  color: theme.dividerColor,
-                )));
+                  controller: homeController.searchEditingController,
+                  style: FxTextStyle.bodyMedium(),
+                  cursorColor: customTheme.homemadeSecondary,
+                  decoration: InputDecoration(
+                    hintText: "Tìm kiếm biển số",
+                    hintStyle: FxTextStyle.bodyMedium(
+                        color: theme.colorScheme.onBackground.withAlpha(150)),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                        borderSide: BorderSide.none),
+                    enabledBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                        borderSide: BorderSide.none),
+                    focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                        borderSide: BorderSide.none),
+                    filled: true,
+                    fillColor: customTheme.card,
+                    prefixIcon: Icon(
+                      FeatherIcons.search,
+                      size: 20,
+                      color: theme.colorScheme.onBackground.withAlpha(150),
+                    ),
+                    isDense: true,
+                    contentPadding: EdgeInsets.only(right: 16),
+                  ),
+                  textCapitalization: TextCapitalization.sentences,
+                )),
+                FxSpacing.width(16),
+                FxContainer.bordered(
+                    onTap: () {
+                      homeController.openEndDrawer();
+                    },
+                    color: customTheme.homemadeSecondary.withAlpha(28),
+                    border: Border.all(
+                        color: customTheme.homemadeSecondary.withAlpha(120)),
+                    borderRadiusAll: 8,
+                    paddingAll: 13,
+                    child: Icon(
+                      FeatherIcons.sliders,
+                      color: customTheme.homemadeSecondary,
+                      size: 18,
+                    ))
+              ],
+            ),
+            FxSpacing.height(16),
+            Expanded(
+              child: (homeController.showLoading
+                  ? const LoadingPage()
+                  : SingleChildScrollView(
+                      child: Container(
+                        child: Column(
+                            children: ((homeController.noplaces!.isNotEmpty
+                                ? _buildNoPlaceList()
+                                : _buildNoHaveList()))),
+                      ),
+                    )),
+            ),
+            FxSpacing.height(16),
+            NumberPaginator(
+              initialPage: 0,
+              numberPages: homeController.noplaces!.isNotEmpty
+                  ? homeController.numPage!
+                  : 1,
+              onPageChange: (int index) {
+                setState(() {
+                  if (homeController.searchText.isNotEmpty) {
+                    homeController.showLoading = true;
+                    homeController.currentPage = index;
+                    homeController.searchList(homeController.searchText,
+                        homeController.idToChoices.join(","));
+                  } else {
+                    homeController.showLoading = true;
+                    homeController.currentPage = index;
+                    homeController.getList();
+                  }
+                });
+              },
+            )
+          ]),
+        ));
   }
 }

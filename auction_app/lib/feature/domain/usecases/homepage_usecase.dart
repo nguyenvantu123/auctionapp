@@ -8,23 +8,65 @@ class HomePageUseCase {
 
   HomePageUseCase({required this.homepageRepository});
 
-  Future<DataState<NoPlaceListModel>> getDataList(ParamsLogin params) async {
-    return await homepageRepository.getDataList(
-        params.username, params.password);
+  Future<DataState<NoPlaceListModel>> getDataList(ParamsList params) async {
+    return await homepageRepository.getDataList(params.nop, params.p);
+  }
+
+  Future<DataState<NoPlaceListModel>> searchDataList(
+      ParamsSearch params) async {
+    return await homepageRepository.searchDataList(
+        params.nop,
+        params.p,
+        params.bienSo,
+        params.maLoai,
+        params.maTinh,
+        params.so,
+        params.tenLoai,
+        params.tenTinh);
   }
 }
 
-class ParamsLogin extends Equatable {
-  final String username;
-  final String password;
+class ParamsList extends Equatable {
+  final int nop;
+  final int p;
 
-  ParamsLogin({required this.username, required this.password});
+  ParamsList({required this.nop, required this.p});
 
   @override
-  List<Object> get props => [username, password];
+  List<Object> get props => [nop, p];
 
   @override
   String toString() {
-    return 'ParamsLogin {username: $username}, {password: $password}';
+    return 'ParamsLogin {nop: $nop}, {p: $p}';
+  }
+}
+
+class ParamsSearch extends Equatable {
+  final int nop;
+  final int p;
+  final String bienSo;
+  final String maLoai;
+  final String maTinh;
+  final String so;
+  final String tenLoai;
+  final String tenTinh;
+
+  const ParamsSearch(
+      {required this.nop,
+      required this.p,
+      required this.bienSo,
+      required this.maLoai,
+      required this.maTinh,
+      required this.so,
+      required this.tenLoai,
+      required this.tenTinh});
+
+  @override
+  List<Object> get props =>
+      [nop, p, bienSo, maLoai, maTinh, so, tenLoai, tenTinh];
+
+  @override
+  String toString() {
+    return 'ParamsLogin {nop: $nop}, {p: $p}';
   }
 }

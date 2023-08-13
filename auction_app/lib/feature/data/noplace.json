@@ -1,0 +1,902 @@
+[
+    {
+      "id": 1,
+      "maTinh": "11",
+      "tenTinh": "Tỉnh Điện Biên",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "27A10201",
+      "so": "10201"
+    },
+    {
+      "id": 2,
+      "maTinh": "17",
+      "tenTinh": "Tỉnh Hòa Bình",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "28A20994",
+      "so": "20994"
+    },
+    {
+      "id": 3,
+      "maTinh": "20",
+      "tenTinh": "Tỉnh Lạng Sơn",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "12A21696",
+      "so": "21696"
+    },
+    {
+      "id": 4,
+      "maTinh": "22",
+      "tenTinh": "Tỉnh Quảng Ninh",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "14C38670",
+      "so": "38670"
+    },
+    {
+      "id": 5,
+      "maTinh": "24",
+      "tenTinh": "Tỉnh Bắc Giang",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "98C31303",
+      "so": "31303"
+    },
+    {
+      "id": 6,
+      "maTinh": "26",
+      "tenTinh": "Tỉnh Vĩnh Phúc",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "88A63254",
+      "so": "63254"
+    },
+    {
+      "id": 7,
+      "maTinh": "27",
+      "tenTinh": "Tỉnh Bắc Ninh",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "99A64988",
+      "so": "64988"
+    },
+    {
+      "id": 8,
+      "maTinh": "27",
+      "tenTinh": "Tỉnh Bắc Ninh",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "99C27049",
+      "so": "27049"
+    },
+    {
+      "id": 9,
+      "maTinh": "30",
+      "tenTinh": "Tỉnh Hải Dương",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "34C38371",
+      "so": "38371"
+    },
+    {
+      "id": 10,
+      "maTinh": "31",
+      "tenTinh": "Thành phố Hải Phòng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "15K19240",
+      "so": "19240"
+    },
+    {
+      "id": 11,
+      "maTinh": "34",
+      "tenTinh": "Tỉnh Thái Bình",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "17A39126",
+      "so": "39126"
+    },
+    {
+      "id": 12,
+      "maTinh": "36",
+      "tenTinh": "Tỉnh Nam Định",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "18A38327",
+      "so": "38327"
+    },
+    {
+      "id": 13,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10561",
+      "so": "10561"
+    },
+    {
+      "id": 14,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10551",
+      "so": "10551"
+    },
+    {
+      "id": 15,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10547",
+      "so": "10547"
+    },
+    {
+      "id": 16,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10661",
+      "so": "10661"
+    },
+    {
+      "id": 17,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10559",
+      "so": "10559"
+    },
+    {
+      "id": 18,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10744",
+      "so": "10744"
+    },
+    {
+      "id": 19,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10525",
+      "so": "10525"
+    },
+    {
+      "id": 20,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10545",
+      "so": "10545"
+    },
+    {
+      "id": 21,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10560",
+      "so": "10560"
+    },
+    {
+      "id": 22,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10543",
+      "so": "10543"
+    },
+    {
+      "id": 23,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10749",
+      "so": "10749"
+    },
+    {
+      "id": 24,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10507",
+      "so": "10507"
+    },
+    {
+      "id": 25,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10526",
+      "so": "10526"
+    },
+    {
+      "id": 26,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10791",
+      "so": "10791"
+    },
+    {
+      "id": 27,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10532",
+      "so": "10532"
+    },
+    {
+      "id": 28,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10712",
+      "so": "10712"
+    },
+    {
+      "id": 29,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10538",
+      "so": "10538"
+    },
+    {
+      "id": 30,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06844",
+      "so": "06844"
+    },
+    {
+      "id": 31,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06880",
+      "so": "06880"
+    },
+    {
+      "id": 32,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06803",
+      "so": "06803"
+    },
+    {
+      "id": 33,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06809",
+      "so": "06809"
+    },
+    {
+      "id": 34,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06879",
+      "so": "06879"
+    },
+    {
+      "id": 35,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06805",
+      "so": "06805"
+    },
+    {
+      "id": 36,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06823",
+      "so": "06823"
+    },
+    {
+      "id": 37,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "11C06837",
+      "so": "06837"
+    },
+    {
+      "id": 38,
+      "maTinh": "17",
+      "tenTinh": "Tỉnh Hòa Bình",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "28A20400",
+      "so": "20400"
+    },
+    {
+      "id": 39,
+      "maTinh": "17",
+      "tenTinh": "Tỉnh Hòa Bình",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "28A21113",
+      "so": "21113"
+    },
+    {
+      "id": 40,
+      "maTinh": "37",
+      "tenTinh": "Tỉnh Ninh Bình",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "35A35707",
+      "so": "35707"
+    },
+    {
+      "id": 41,
+      "maTinh": "38",
+      "tenTinh": "Tỉnh Thanh Hóa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "36A98344",
+      "so": "98344"
+    },
+    {
+      "id": 42,
+      "maTinh": "40",
+      "tenTinh": "Tỉnh Nghệ An",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "37K22054",
+      "so": "22054"
+    },
+    {
+      "id": 43,
+      "maTinh": "42",
+      "tenTinh": "Tỉnh Hà Tĩnh",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "38A55723",
+      "so": "55723"
+    },
+    {
+      "id": 44,
+      "maTinh": "44",
+      "tenTinh": "Tỉnh Quảng Bình",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "73A31297",
+      "so": "31297"
+    },
+    {
+      "id": 45,
+      "maTinh": "48",
+      "tenTinh": "Thành phố Đà Nẵng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "43A79293",
+      "so": "79293"
+    },
+    {
+      "id": 46,
+      "maTinh": "49",
+      "tenTinh": "Tỉnh Quảng Nam",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "92A35911",
+      "so": "35911"
+    },
+    {
+      "id": 47,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A47994",
+      "so": "47994"
+    },
+    {
+      "id": 48,
+      "maTinh": "60",
+      "tenTinh": "Tỉnh Bình Thuận",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "86A27104",
+      "so": "27104"
+    },
+    {
+      "id": 49,
+      "maTinh": "60",
+      "tenTinh": "Tỉnh Bình Thuận",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "86A26715",
+      "so": "26715"
+    },
+    {
+      "id": 50,
+      "maTinh": "60",
+      "tenTinh": "Tỉnh Bình Thuận",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "86A26603",
+      "so": "26603"
+    },
+    {
+      "id": 51,
+      "maTinh": "60",
+      "tenTinh": "Tỉnh Bình Thuận",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "86A27618",
+      "so": "27618"
+    },
+    {
+      "id": 52,
+      "maTinh": "66",
+      "tenTinh": "Tỉnh Đắk Lắk",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "47A60645",
+      "so": "60645"
+    },
+    {
+      "id": 53,
+      "maTinh": "68",
+      "tenTinh": "Tỉnh Lâm Đồng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "49A61934",
+      "so": "61934"
+    },
+    {
+      "id": 54,
+      "maTinh": "70",
+      "tenTinh": "Tỉnh Bình Phước",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "93A43633",
+      "so": "43633"
+    },
+    {
+      "id": 55,
+      "maTinh": "72",
+      "tenTinh": "Tỉnh Tây Ninh",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "70A48091",
+      "so": "48091"
+    },
+    {
+      "id": 56,
+      "maTinh": "74",
+      "tenTinh": "Tỉnh Bình Dương",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "61K27576",
+      "so": "27576"
+    },
+    {
+      "id": 57,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10622",
+      "so": "10622"
+    },
+    {
+      "id": 58,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10639",
+      "so": "10639"
+    },
+    {
+      "id": 59,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10734",
+      "so": "10734"
+    },
+    {
+      "id": 60,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10667",
+      "so": "10667"
+    },
+    {
+      "id": 61,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10678",
+      "so": "10678"
+    },
+    {
+      "id": 62,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10500",
+      "so": "10500"
+    },
+    {
+      "id": 63,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10566",
+      "so": "10566"
+    },
+    {
+      "id": 64,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10606",
+      "so": "10606"
+    },
+    {
+      "id": 65,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10793",
+      "so": "10793"
+    },
+    {
+      "id": 66,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10626",
+      "so": "10626"
+    },
+    {
+      "id": 67,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10772",
+      "so": "10772"
+    },
+    {
+      "id": 68,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10404",
+      "so": "10404"
+    },
+    {
+      "id": 69,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10631",
+      "so": "10631"
+    },
+    {
+      "id": 70,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10592",
+      "so": "10592"
+    },
+    {
+      "id": 71,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10665",
+      "so": "10665"
+    },
+    {
+      "id": 72,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10603",
+      "so": "10603"
+    },
+    {
+      "id": 73,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10633",
+      "so": "10633"
+    },
+    {
+      "id": 74,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10558",
+      "so": "10558"
+    },
+    {
+      "id": 75,
+      "maTinh": "11",
+      "tenTinh": "Tỉnh Điện Biên",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "27A10382",
+      "so": "10382"
+    },
+    {
+      "id": 76,
+      "maTinh": "17",
+      "tenTinh": "Tỉnh Hòa Bình",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "28A20574",
+      "so": "20574"
+    },
+    {
+      "id": 77,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A48717",
+      "so": "48717"
+    },
+    {
+      "id": 78,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A49200",
+      "so": "49200"
+    },
+    {
+      "id": 79,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A49461",
+      "so": "49461"
+    },
+    {
+      "id": 80,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A47798",
+      "so": "47798"
+    },
+    {
+      "id": 81,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A48907",
+      "so": "48907"
+    },
+    {
+      "id": 82,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A48993",
+      "so": "48993"
+    },
+    {
+      "id": 83,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A48883",
+      "so": "48883"
+    },
+    {
+      "id": 84,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A47822",
+      "so": "47822"
+    },
+    {
+      "id": 85,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A48572",
+      "so": "48572"
+    },
+    {
+      "id": 86,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A46966",
+      "so": "46966"
+    },
+    {
+      "id": 87,
+      "maTinh": "56",
+      "tenTinh": "Tỉnh Khánh Hòa",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "79A48807",
+      "so": "48807"
+    },
+    {
+      "id": 88,
+      "maTinh": "60",
+      "tenTinh": "Tỉnh Bình Thuận",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "86A27314",
+      "so": "27314"
+    },
+    {
+      "id": 89,
+      "maTinh": "74",
+      "tenTinh": "Tỉnh Bình Dương",
+      "maLoai": "02",
+      "tenLoai": "Xe tải",
+      "bienSo": "61C55122",
+      "so": "55122"
+    },
+    {
+      "id": 90,
+      "maTinh": "75",
+      "tenTinh": "Tỉnh Đồng Nai",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "60K38950",
+      "so": "38950"
+    },
+    {
+      "id": 91,
+      "maTinh": "75",
+      "tenTinh": "Tỉnh Đồng Nai",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "60K41922",
+      "so": "41922"
+    },
+    {
+      "id": 92,
+      "maTinh": "77",
+      "tenTinh": "Tỉnh Bà Rịa - Vũng Tàu",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "72A73951",
+      "so": "73951"
+    },
+    {
+      "id": 93,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10690",
+      "so": "10690"
+    },
+    {
+      "id": 94,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10689",
+      "so": "10689"
+    },
+    {
+      "id": 95,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10602",
+      "so": "10602"
+    },
+    {
+      "id": 96,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10713",
+      "so": "10713"
+    },
+    {
+      "id": 97,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10548",
+      "so": "10548"
+    },
+    {
+      "id": 98,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10745",
+      "so": "10745"
+    },
+    {
+      "id": 99,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10632",
+      "so": "10632"
+    },
+    {
+      "id": 100,
+      "maTinh": "04",
+      "tenTinh": "Tỉnh Cao Bằng",
+      "maLoai": "01",
+      "tenLoai": "Xe Con",
+      "bienSo": "11A10792",
+      "so": "10792"
+    }
+  ]

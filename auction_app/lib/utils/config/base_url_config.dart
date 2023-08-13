@@ -7,4 +7,5 @@ class RouteConfig {
   static String getListNoPlace = '/api/tracuu/get-all';
   static String categoryAll = '/api/DanhMuc/dm-all';
   static String categoryNoPlaceAll = '/api/DanhMuc/dm-loai-bien';
+  static String searchList = '/api/tracuu/sokhac';
 }

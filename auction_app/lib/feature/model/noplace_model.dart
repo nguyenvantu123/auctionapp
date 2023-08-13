@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+
 class NoPlaceModel {
   String bienSo;
 
@@ -43,4 +47,21 @@ class NoPlaceModel {
         "tenLoai": tenLoai,
         "tenTinh": tenTinh,
       };
+
+  static Future<String> getData() async {
+    return await rootBundle.loadString('lib/feature/data/noplace.json');
+  }
+
+  static List<NoPlaceModel> getListFromJson(List<dynamic> jsonArray) {
+    List<NoPlaceModel> list = [];
+    for (int i = 0; i < jsonArray.length; i++) {
+      list.add(NoPlaceModel.fromJson(jsonArray[i]));
+    }
+    return list;
+  }
+
+  static Future<List<NoPlaceModel>> getDummyList() async {
+    dynamic data = json.decode(await getData());
+    return getListFromJson(data);
+  }
 }
