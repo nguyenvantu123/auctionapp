@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomepageWidget>
                           Wrap(
                             spacing: 10,
                             runSpacing: 10,
-                            children: _buildCarType(),
+                            children: _buildNoPlaceType(),
                           ),
                           FxSpacing.height(24),
                         ],
@@ -420,6 +420,64 @@ class _HomeScreenState extends State<HomepageWidget>
     return choices;
   }
 
+  List<Widget> _buildNoPlaceType() {
+    List<String> categoryList = [];
+
+    List<Widget> choices = [];
+    if (homeController.noplacetypemodels.isEmpty) {
+      return choices;
+    }
+
+    homeController.noplacetypemodels?.forEach((element) {
+      categoryList.add(element.ten);
+    });
+
+    for (var item in categoryList) {
+      if (homeController.selectedNoPlaceTypeChoices == item) {
+        choices.add(FxContainer.none(
+            color: customTheme.homemadePrimary.withAlpha(28),
+            bordered: true,
+            borderRadiusAll: 12,
+            paddingAll: 8,
+            border: Border.all(color: customTheme.homemadePrimary),
+            onTap: () {
+              homeController.removeNoPlaceTypeChoice(item);
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.check,
+                  size: 14,
+                  color: customTheme.homemadePrimary,
+                ),
+                FxSpacing.width(6),
+                FxText.bodySmall(
+                  item,
+                  fontSize: 11,
+                  color: customTheme.homemadePrimary,
+                )
+              ],
+            )));
+      } else {
+        choices.add(FxContainer.none(
+          color: customTheme.border,
+          borderRadiusAll: 12,
+          padding: FxSpacing.xy(12, 8),
+          onTap: () {
+            homeController.addNoPlaceTypeChoice(item);
+          },
+          child: FxText.labelSmall(
+            item,
+            color: theme.colorScheme.onBackground,
+            fontSize: 11,
+          ),
+        ));
+      }
+    }
+    return choices;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FxBuilder<HomePageController>(
@@ -435,7 +493,7 @@ class _HomeScreenState extends State<HomepageWidget>
         endDrawer: _endDrawer(),
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 60, 24, 64),
+          padding: const EdgeInsets.fromLTRB(24, 60, 24, 40),
           child: Column(children: [
             Row(
               children: [
@@ -445,7 +503,9 @@ class _HomeScreenState extends State<HomepageWidget>
                     setState(() {
                       homeController.showLoading = true;
                       homeController.searchList(
-                          value, homeController.idCityToChoices.join(","));
+                          value,
+                          homeController.idCityToChoices.join(","),
+                          homeController.idCarTypeToChoices.join(","));
                     });
                   },
                   controller: homeController.searchEditingController,
@@ -512,7 +572,7 @@ class _HomeScreenState extends State<HomepageWidget>
                       ),
                     )),
             ),
-            FxSpacing.height(16),
+            FxSpacing.height(5),
             NumberPaginator(
               initialPage: 0,
               numberPages: homeController.noplaces!.isNotEmpty
@@ -523,8 +583,10 @@ class _HomeScreenState extends State<HomepageWidget>
                   if (homeController.searchText.isNotEmpty) {
                     homeController.showLoading = true;
                     homeController.currentPage = index;
-                    homeController.searchList(homeController.searchText,
-                        homeController.idCityToChoices.join(","));
+                    homeController.searchList(
+                        homeController.searchText,
+                        homeController.idCityToChoices.join(","),
+                        homeController.idCarTypeToChoices.join(","));
                   } else {
                     homeController.showLoading = true;
                     homeController.currentPage = index;

@@ -3,6 +3,7 @@ import 'package:auction_app/feature/data/homepage_datasource.dart';
 import 'package:auction_app/feature/domain/repository/homepage_repository.dart';
 import 'package:auction_app/feature/model/category.dart';
 import 'package:auction_app/feature/model/noplace_list_model.dart';
+import 'package:auction_app/feature/model/noplace_type.dart';
 import 'package:auction_app/utils/resources/data_state.dart';
 
 class HomePageRepositoryImpl implements HomepageRepository {
@@ -38,6 +39,28 @@ class HomePageRepositoryImpl implements HomepageRepository {
   @override
   Future<DataState<CategoryModel>> getAllCategory() async {
     var response = await loginRemoteDataSource.getAllCategory();
+    return response;
+  }
+
+  @override
+  Future<DataState<List<NoPlaceTypeModel>>> getListNoPlaceType() async {
+    var response = await loginRemoteDataSource.getListNoPlaceType();
+    return response;
+  }
+
+  @override
+  Future<DataState<NoPlaceListModel>> getNoplaceType(
+      int nop,
+      int p,
+      String bienSo,
+      String id,
+      String maLoai,
+      String maTinh,
+      String so,
+      String tenLoai,
+      String tenTinh) async {
+    var response = await loginRemoteDataSource.getNoplaceType(
+        nop, p, bienSo, id, maLoai, maTinh, so, tenLoai, tenTinh);
     return response;
   }
 }

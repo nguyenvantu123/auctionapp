@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:auction_app/feature/model/category.dart';
 import 'package:auction_app/feature/model/noplace_list_model.dart';
+import 'package:auction_app/feature/model/noplace_type.dart';
 import 'package:dio/dio.dart';
 import 'package:auction_app/utils/config/base_url_config.dart';
 import 'package:auction_app/utils/config/constant_config.dart';
@@ -25,6 +26,19 @@ abstract class HomePageRemoteDataSource {
       String tenTinh);
 
   Future<DataState<CategoryModel>> getAllCategory();
+
+  Future<DataState<List<NoPlaceTypeModel>>> getListNoPlaceType();
+
+  Future<DataState<NoPlaceListModel>> getNoplaceType(
+      int nop,
+      int p,
+      String bienSo,
+      String id,
+      String maLoai,
+      String maTinh,
+      String so,
+      String tenLoai,
+      String tenTinh);
 
   /// Calls the [baseUrl]/v2/top-headlines?country=:country&apiKey=:apiKey&q=:q
   ///
@@ -138,6 +152,97 @@ class LoginRemoteDataSourceImpl implements HomePageRemoteDataSource {
       ),
     );
     var dataResponse = CategoryModel.fromJson(response.data);
+
+    return DataSuccess(dataResponse);
+  }
+
+  @override
+  Future<DataState<List<NoPlaceTypeModel>>> getListNoPlaceType() async {
+    // TODO: implement getListNoPlaceType
+    var headers = {
+      'Accept': 'application/json, text/plain, */*',
+      'Accept-Language':
+          'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+      'Connection': 'keep-alive',
+      'DNT': '1',
+      'Origin': 'https://daugiabiensoxe.com.vn',
+      'Referer': 'https://daugiabiensoxe.com.vn/',
+      'Sec-Fetch-Dest': 'empty',
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Site': 'same-site',
+      'User-Agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+      'sec-ch-ua':
+          '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'sec-ch-ua-platform': '"macOS"'
+    };
+    var dio = Dio();
+    var response = await dio.request(
+      'https://api-sodep.daugiabiensoxe.com.vn/api/DanhMuc/dm-loai-bien',
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+
+    var dataResponse = NoPlaceTypeModel.getListFromJson(response.data);
+
+    return DataSuccess(dataResponse);
+  }
+
+  @override
+  Future<DataState<NoPlaceListModel>> getNoplaceType(
+      int nop,
+      int p,
+      String bienSo,
+      String id,
+      String maLoai,
+      String maTinh,
+      String so,
+      String tenLoai,
+      String tenTinh) async {
+    var params = {
+      'bienSo': bienSo,
+      'maLoai': maLoai,
+      'maTinh': maTinh,
+      'so': so,
+      'tenLoai': tenLoai,
+      'tenTinh': tenTinh,
+      'id': id
+    };
+    var dio = new Dio();
+
+    var headers = {
+      'Accept': 'application/json, text/plain, */*',
+      'Accept-Language':
+          'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+      'Connection': 'keep-alive',
+      'Content-Type': 'application/json',
+      'DNT': '1',
+      'Origin': 'https://daugiabiensoxe.com.vn',
+      'Referer': 'https://daugiabiensoxe.com.vn/',
+      'Sec-Fetch-Dest': 'empty',
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Site': 'same-site',
+      'User-Agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+      'sec-ch-ua':
+          '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'sec-ch-ua-platform': '"macOS"'
+    };
+
+    Response response = await dio.request(
+      'https://api-sodep.daugiabiensoxe.com.vn/api/tracuu/so-giong-nhau?nop=${nop}&p=${p}',
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      data: json.encode(params),
+    );
+
+    var dataResponse = NoPlaceListModel.fromJson(response.data);
 
     return DataSuccess(dataResponse);
   }

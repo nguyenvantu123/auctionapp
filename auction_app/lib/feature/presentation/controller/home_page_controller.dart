@@ -2,6 +2,7 @@ import 'package:auction_app/feature/domain/repository/homepage_repository.dart';
 import 'package:auction_app/feature/model/car_type_model.dart';
 import 'package:auction_app/feature/model/city_model.dart';
 import 'package:auction_app/feature/model/noplace_model.dart';
+import 'package:auction_app/feature/model/noplace_type.dart';
 import 'package:auction_app/feature/presentation/widget/noplace_dialog.dart';
 import 'package:auction_app/injection_container.dart';
 import 'package:auction_app/utils/resources/data_state.dart';
@@ -29,12 +30,16 @@ class HomePageController extends FxController {
 
   List<CityModel>? citymodels = [];
   List<CarTypeModel>? cartypemodels = [];
+  List<NoPlaceTypeModel> noplacetypemodels = [];
 
   List<String> idCityToChoices = [];
   List<String> selectedCityChoices = [];
 
   List<String> idCarTypeToChoices = [];
   List<String> selectedCarTypeChoices = [];
+
+  String idNoPlaceTypeToChoices = "";
+  String selectedNoPlaceTypeChoices = "";
 
   @override
   initState() {
@@ -44,6 +49,7 @@ class HomePageController extends FxController {
 
     getListCategory();
     getList();
+    getListNoPlaceType();
   }
 
   void getListCategory() async {
@@ -53,6 +59,17 @@ class HomePageController extends FxController {
       citymodels = response.data?.tinhThanh;
 
       cartypemodels = response.data?.loaiXe;
+    }
+    // noplaces = await NoPlaceModel.getDummyList();
+
+    update();
+  }
+
+  void getListNoPlaceType() async {
+    var response = await homepageRepository.getListNoPlaceType();
+
+    if (response is DataSuccess) {
+      noplacetypemodels = response.data!;
     }
     // noplaces = await NoPlaceModel.getDummyList();
 
@@ -84,18 +101,43 @@ class HomePageController extends FxController {
     update();
   }
 
-  void searchList(String value, String tenTinh) async {
+  void searchList(String value, String tenTinh, String maLoai) async {
     searchText = value;
     searchEditingController = TextEditingController(text: value);
     locationEditingController = TextEditingController();
     // await Future.delayed(const Duration(seconds: 1));
     var response;
-    if (value.isEmpty && tenTinh.isEmpty) {
+    if (value.isEmpty && tenTinh.isEmpty && maLoai.isEmpty) {
       response = await homepageRepository.getDataList(100, currentPage + 1);
     } else {
       response = await homepageRepository.searchDataList(
-          100, currentPage + 1, value, "", "", "", "", tenTinh);
+          100, currentPage + 1, value, maLoai, "", "", "", tenTinh);
     }
+
+    if (response is DataSuccess) {
+      noplaces = response.data?.listViewBienSo;
+
+      totalItem = response.data?.rowCout;
+
+      numPage = response.data?.pageCount;
+    }
+    // noplaces = await NoPlaceModel.getDummyList();
+
+    showLoading = false;
+    uiLoading = false;
+
+    update();
+  }
+
+  void noplaceTypeList(
+      String id, String value, String tenTinh, String maLoai) async {
+    searchText = value;
+    searchEditingController = TextEditingController(text: value);
+    locationEditingController = TextEditingController();
+    // await Future.delayed(const Duration(seconds: 1));
+    var response;
+    response = await homepageRepository.getNoplaceType(
+        100, currentPage + 1, value, id, maLoai, "", "", "", tenTinh);
 
     if (response is DataSuccess) {
       noplaces = response.data?.listViewBienSo;
@@ -119,19 +161,46 @@ class HomePageController extends FxController {
   void closeEndDrawer() {
     scaffoldKey.currentState?.openDrawer();
 
-    for (var item in selectedCityChoices) {
-      String id =
-          citymodels!.where((element) => element.tenTinh == item).first.maTinh;
+    if (selectedNoPlaceTypeChoices.isNotEmpty) {
+      String id = noplacetypemodels!
+          .where((element) => element.ten == selectedNoPlaceTypeChoices)
+          .first
+          .ma;
 
-      idCityToChoices.add(id);
+      noplaceTypeList(id, searchEditingController.text,
+          idCityToChoices.join(","), idCarTypeToChoices.join(","));
+    } else {
+      for (var item in selectedCityChoices) {
+        String id = citymodels!
+            .where((element) => element.tenTinh == item)
+            .first
+            .maTinh;
+
+        idCityToChoices.add(id);
+      }
+
+      for (var item in selectedCarTypeChoices) {
+        String id = cartypemodels!
+            .where((element) => element.tenLoai == item)
+            .first
+            .maLoai;
+
+        idCarTypeToChoices.add(id);
+      }
+
+      searchList(searchEditingController.text, idCityToChoices.join(","),
+          idCarTypeToChoices.join(","));
     }
-
-    searchList(searchEditingController.text, idCityToChoices.join(","));
   }
 
   void clearDrawer() {
     selectedCityChoices = [];
     idCityToChoices = [];
+
+    selectedCarTypeChoices = [];
+    idCarTypeToChoices = [];
+
+    selectedNoPlaceTypeChoices = "";
     update();
   }
 
@@ -152,6 +221,16 @@ class HomePageController extends FxController {
 
   void removeCarTypeChoice(String item) {
     selectedCarTypeChoices.remove(item);
+    update();
+  }
+
+  void addNoPlaceTypeChoice(String item) {
+    selectedNoPlaceTypeChoices = item;
+    update();
+  }
+
+  void removeNoPlaceTypeChoice(String item) {
+    selectedNoPlaceTypeChoices = "";
     update();
   }
 
