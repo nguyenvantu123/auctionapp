@@ -2,7 +2,6 @@ import 'package:auction_app/feature/domain/repository/homepage_repository.dart';
 import 'package:auction_app/feature/model/car_type_model.dart';
 import 'package:auction_app/feature/model/city_model.dart';
 import 'package:auction_app/feature/model/noplace_model.dart';
-import 'package:auction_app/feature/presentation/shared/loading_page.dart';
 import 'package:auction_app/feature/presentation/widget/noplace_dialog.dart';
 import 'package:auction_app/injection_container.dart';
 import 'package:auction_app/utils/resources/data_state.dart';
@@ -28,12 +27,14 @@ class HomePageController extends FxController {
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<String> selectedChoices = [];
-
   List<CityModel>? citymodels = [];
   List<CarTypeModel>? cartypemodels = [];
 
-  List<String> idToChoices = [];
+  List<String> idCityToChoices = [];
+  List<String> selectedCityChoices = [];
+
+  List<String> idCarTypeToChoices = [];
+  List<String> selectedCarTypeChoices = [];
 
   @override
   initState() {
@@ -118,28 +119,39 @@ class HomePageController extends FxController {
   void closeEndDrawer() {
     scaffoldKey.currentState?.openDrawer();
 
-    for (var item in selectedChoices) {
+    for (var item in selectedCityChoices) {
       String id =
           citymodels!.where((element) => element.tenTinh == item).first.maTinh;
 
-      idToChoices.add(id);
+      idCityToChoices.add(id);
     }
 
-    searchList(searchEditingController.text, idToChoices.join(","));
+    searchList(searchEditingController.text, idCityToChoices.join(","));
   }
 
   void clearDrawer() {
-    selectedChoices = [];
+    selectedCityChoices = [];
+    idCityToChoices = [];
     update();
   }
 
-  void addChoice(String item) {
-    selectedChoices.add(item);
+  void addCityChoice(String item) {
+    selectedCityChoices.add(item);
     update();
   }
 
-  void removeChoice(String item) {
-    selectedChoices.remove(item);
+  void removeCityChoice(String item) {
+    selectedCityChoices.remove(item);
+    update();
+  }
+
+  void addCarTypeChoice(String item) {
+    selectedCarTypeChoices.add(item);
+    update();
+  }
+
+  void removeCarTypeChoice(String item) {
+    selectedCarTypeChoices.remove(item);
     update();
   }
 

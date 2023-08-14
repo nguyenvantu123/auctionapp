@@ -19,11 +19,14 @@ class HomepageWidget extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomepageWidget> {
+class _HomeScreenState extends State<HomepageWidget>
+    with TickerProviderStateMixin {
   late ThemeData theme;
   late CustomTheme customTheme;
 
   late HomePageController homeController;
+
+  late final _tabController = TabController(length: 3, vsync: this);
 
   @override
   void initState() {
@@ -167,39 +170,97 @@ class _HomeScreenState extends State<HomepageWidget> {
                     ],
                   ),
                 ),
-                Expanded(
-                    child: ListView(
-                  padding: FxSpacing.all(16),
-                  children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FxText.bodyMedium(
-                            "Thành phố",
-                            color: theme.colorScheme.onBackground,
-                            fontWeight: 600,
-                          ),
-                          FxText.bodySmall(
-                            "${homeController.selectedChoices.length} selected",
-                            color: theme.colorScheme.onBackground,
-                            fontWeight: 600,
-                            xMuted: true,
-                          ),
-                        ],
-                      ),
+                TabBar(
+                  isScrollable: true,
+                  controller: _tabController,
+                  tabs: const [
+                    Tab(
+                      text: 'Thành phố ',
                     ),
-                    FxSpacing.height(16),
-                    Container(
-                      child: Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: _buildType(),
-                      ),
+                    Tab(
+                      text: 'Loại xe',
                     ),
-                    FxSpacing.height(24),
+                    Tab(
+                      text: 'Loại biển',
+                    ),
                   ],
-                )),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      Tab(
+                          child: ListView(
+                        padding: FxSpacing.all(16),
+                        children: [
+                          Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: _buildCity(),
+                          ),
+                          FxSpacing.height(24),
+                        ],
+                      )),
+                      Tab(
+                          child: ListView(
+                        padding: FxSpacing.all(16),
+                        children: [
+                          Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: _buildCarType(),
+                          ),
+                          FxSpacing.height(24),
+                        ],
+                      )),
+                      Tab(
+                          child: ListView(
+                        padding: FxSpacing.all(16),
+                        children: [
+                          Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: _buildCarType(),
+                          ),
+                          FxSpacing.height(24),
+                        ],
+                      ))
+                    ],
+                  ),
+                ),
+                // Expanded(
+                //     child: ListView(
+                //   padding: FxSpacing.all(16),
+                //   children: [
+                //     Container(
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           FxText.bodyMedium(
+                //             "Thành phố",
+                //             color: theme.colorScheme.onBackground,
+                //             fontWeight: 600,
+                //           ),
+                //           FxText.bodySmall(
+                //             "${homeController.selectedCityChoices.length} selected",
+                //             color: theme.colorScheme.onBackground,
+                //             fontWeight: 600,
+                //             xMuted: true,
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //     FxSpacing.height(16),
+                //     Container(
+                //       child: Wrap(
+                //         spacing: 10,
+                //         runSpacing: 10,
+                //         children: _buildCity(),
+                //       ),
+                //     ),
+                //     FxSpacing.height(24),
+                //   ],
+                // )),
                 Row(
                   children: [
                     Expanded(
@@ -241,7 +302,7 @@ class _HomeScreenState extends State<HomepageWidget> {
     );
   }
 
-  List<Widget> _buildType() {
+  List<Widget> _buildCity() {
     List<String> categoryList = [];
 
     List<Widget> choices = [];
@@ -254,7 +315,7 @@ class _HomeScreenState extends State<HomepageWidget> {
     });
 
     for (var item in categoryList) {
-      bool selected = homeController.selectedChoices.contains(item);
+      bool selected = homeController.selectedCityChoices.contains(item);
       if (selected) {
         choices.add(FxContainer.none(
             color: customTheme.homemadePrimary.withAlpha(28),
@@ -263,7 +324,7 @@ class _HomeScreenState extends State<HomepageWidget> {
             paddingAll: 8,
             border: Border.all(color: customTheme.homemadePrimary),
             onTap: () {
-              homeController.removeChoice(item);
+              homeController.removeCityChoice(item);
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -287,7 +348,66 @@ class _HomeScreenState extends State<HomepageWidget> {
           borderRadiusAll: 12,
           padding: FxSpacing.xy(12, 8),
           onTap: () {
-            homeController.addChoice(item);
+            homeController.addCityChoice(item);
+          },
+          child: FxText.labelSmall(
+            item,
+            color: theme.colorScheme.onBackground,
+            fontSize: 11,
+          ),
+        ));
+      }
+    }
+    return choices;
+  }
+
+  List<Widget> _buildCarType() {
+    List<String> categoryList = [];
+
+    List<Widget> choices = [];
+    if (homeController.cartypemodels!.isEmpty) {
+      return choices;
+    }
+
+    homeController.cartypemodels?.forEach((element) {
+      categoryList.add(element.tenLoai);
+    });
+
+    for (var item in categoryList) {
+      bool selected = homeController.selectedCarTypeChoices.contains(item);
+      if (selected) {
+        choices.add(FxContainer.none(
+            color: customTheme.homemadePrimary.withAlpha(28),
+            bordered: true,
+            borderRadiusAll: 12,
+            paddingAll: 8,
+            border: Border.all(color: customTheme.homemadePrimary),
+            onTap: () {
+              homeController.removeCarTypeChoice(item);
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.check,
+                  size: 14,
+                  color: customTheme.homemadePrimary,
+                ),
+                FxSpacing.width(6),
+                FxText.bodySmall(
+                  item,
+                  fontSize: 11,
+                  color: customTheme.homemadePrimary,
+                )
+              ],
+            )));
+      } else {
+        choices.add(FxContainer.none(
+          color: customTheme.border,
+          borderRadiusAll: 12,
+          padding: FxSpacing.xy(12, 8),
+          onTap: () {
+            homeController.addCarTypeChoice(item);
           },
           child: FxText.labelSmall(
             item,
@@ -325,7 +445,7 @@ class _HomeScreenState extends State<HomepageWidget> {
                     setState(() {
                       homeController.showLoading = true;
                       homeController.searchList(
-                          value, homeController.idToChoices.join(","));
+                          value, homeController.idCityToChoices.join(","));
                     });
                   },
                   controller: homeController.searchEditingController,
@@ -404,7 +524,7 @@ class _HomeScreenState extends State<HomepageWidget> {
                     homeController.showLoading = true;
                     homeController.currentPage = index;
                     homeController.searchList(homeController.searchText,
-                        homeController.idToChoices.join(","));
+                        homeController.idCityToChoices.join(","));
                   } else {
                     homeController.showLoading = true;
                     homeController.currentPage = index;
