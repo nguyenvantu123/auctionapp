@@ -1,8 +1,6 @@
 import 'package:auction_app/feature/presentation/controller/noplace_dialog_controller.dart';
 import 'package:auction_app/flutx/theme/app_theme.dart';
-import 'package:auction_app/flutx/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 
 class NoPlaceDialog extends StatefulWidget {

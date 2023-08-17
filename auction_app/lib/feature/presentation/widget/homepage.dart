@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:auction_app/feature/model/noplace_model.dart';
 import 'package:auction_app/feature/presentation/controller/home_page_controller.dart';
 import 'package:auction_app/feature/presentation/shared/loading_page.dart';
 import 'package:auction_app/flutx/theme/app_theme.dart';
-import 'package:auction_app/loading_effect.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
@@ -27,6 +24,8 @@ class _HomeScreenState extends State<HomepageWidget>
   late HomePageController homeController;
 
   late final _tabController = TabController(length: 3, vsync: this);
+
+  bool isDark = false;
 
   @override
   void initState() {
@@ -71,17 +70,31 @@ class _HomeScreenState extends State<HomepageWidget>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FxText.bodyLarge(
-                      shop.bienSo.substring(0, 3) +
-                          " - " +
-                          shop.bienSo.substring(3, 6) +
-                          "." +
-                          shop.bienSo.substring(6, 8),
+                      "${shop.bienSo.substring(0, 3)} - ${shop.bienSo.substring(3, 6)}.${shop.bienSo.substring(6, 8)}",
                       fontWeight: 600,
                     ),
-                    IconButton(
-                        icon: Icon(FeatherIcons.heart),
-                        color: customTheme.homemadePrimary,
-                        onPressed: () => {}),
+                    SizedBox(
+                      width: 25,
+                      height: 25,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () {
+                          homeController.favouriteOnClick(shop.bienSo);
+                        },
+                        child: FlareActor(
+                          "assets/animations/rive/favorite.flr",
+                          snapToEnd: false,
+                          animation: homeController.indexChoose
+                                      .containsKey(shop.bienSo) &&
+                                  homeController.indexChoose[shop.bienSo] ==
+                                      'Favorite'
+                              ? 'Favorite'
+                              : 'Unfavorite',
+                          shouldClip: false,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 FxSpacing.height(8),
@@ -228,39 +241,6 @@ class _HomeScreenState extends State<HomepageWidget>
                     ],
                   ),
                 ),
-                // Expanded(
-                //     child: ListView(
-                //   padding: FxSpacing.all(16),
-                //   children: [
-                //     Container(
-                //       child: Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         children: [
-                //           FxText.bodyMedium(
-                //             "Thành phố",
-                //             color: theme.colorScheme.onBackground,
-                //             fontWeight: 600,
-                //           ),
-                //           FxText.bodySmall(
-                //             "${homeController.selectedCityChoices.length} selected",
-                //             color: theme.colorScheme.onBackground,
-                //             fontWeight: 600,
-                //             xMuted: true,
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //     FxSpacing.height(16),
-                //     Container(
-                //       child: Wrap(
-                //         spacing: 10,
-                //         runSpacing: 10,
-                //         children: _buildCity(),
-                //       ),
-                //     ),
-                //     FxSpacing.height(24),
-                //   ],
-                // )),
                 Row(
                   children: [
                     Expanded(
@@ -428,9 +408,9 @@ class _HomeScreenState extends State<HomepageWidget>
       return choices;
     }
 
-    homeController.noplacetypemodels?.forEach((element) {
+    for (var element in homeController.noplacetypemodels) {
       categoryList.add(element.ten);
-    });
+    }
 
     for (var item in categoryList) {
       if (homeController.selectedNoPlaceTypeChoices == item) {
@@ -538,7 +518,7 @@ class _HomeScreenState extends State<HomepageWidget>
                       color: theme.colorScheme.onBackground.withAlpha(150),
                     ),
                     isDense: true,
-                    contentPadding: EdgeInsets.only(right: 16),
+                    contentPadding: const EdgeInsets.only(right: 16),
                   ),
                   textCapitalization: TextCapitalization.sentences,
                 )),
@@ -564,12 +544,10 @@ class _HomeScreenState extends State<HomepageWidget>
               child: (homeController.showLoading
                   ? const LoadingPage()
                   : SingleChildScrollView(
-                      child: Container(
-                        child: Column(
-                            children: ((homeController.noplaces!.isNotEmpty
-                                ? _buildNoPlaceList()
-                                : _buildNoHaveList()))),
-                      ),
+                      child: Column(
+                          children: ((homeController.noplaces!.isNotEmpty
+                              ? _buildNoPlaceList()
+                              : _buildNoHaveList()))),
                     )),
             ),
             FxSpacing.height(5),

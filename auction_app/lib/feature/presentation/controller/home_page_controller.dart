@@ -1,6 +1,9 @@
+import 'dart:collection';
+
 import 'package:auction_app/feature/domain/repository/homepage_repository.dart';
 import 'package:auction_app/feature/model/car_type_model.dart';
 import 'package:auction_app/feature/model/city_model.dart';
+import 'package:auction_app/feature/model/noplace_list_model.dart';
 import 'package:auction_app/feature/model/noplace_model.dart';
 import 'package:auction_app/feature/model/noplace_type.dart';
 import 'package:auction_app/feature/presentation/widget/noplace_dialog.dart';
@@ -40,6 +43,10 @@ class HomePageController extends FxController {
 
   String idNoPlaceTypeToChoices = "";
   String selectedNoPlaceTypeChoices = "";
+
+  String status = "Unfavorite";
+
+  HashMap<String, String> indexChoose = HashMap<String, String>();
 
   @override
   initState() {
@@ -106,7 +113,7 @@ class HomePageController extends FxController {
     searchEditingController = TextEditingController(text: value);
     locationEditingController = TextEditingController();
     // await Future.delayed(const Duration(seconds: 1));
-    var response;
+    DataState<NoPlaceListModel> response;
     if (value.isEmpty && tenTinh.isEmpty && maLoai.isEmpty) {
       response = await homepageRepository.getDataList(100, currentPage + 1);
     } else {
@@ -135,7 +142,7 @@ class HomePageController extends FxController {
     searchEditingController = TextEditingController(text: value);
     locationEditingController = TextEditingController();
     // await Future.delayed(const Duration(seconds: 1));
-    var response;
+    DataState<NoPlaceListModel> response;
     response = await homepageRepository.getNoplaceType(
         100, currentPage + 1, value, id, maLoai, "", "", "", tenTinh);
 
@@ -238,6 +245,16 @@ class HomePageController extends FxController {
     showDialog(
         context: context,
         builder: (BuildContext context) => const NoPlaceDialog());
+  }
+
+  void favouriteOnClick(String noPlace) {
+    if (indexChoose.isEmpty || !indexChoose.containsKey(noPlace)) {
+      indexChoose[noPlace] = "Favorite";
+      update();
+    } else {
+      indexChoose.remove(noPlace);
+      update();
+    }
   }
 
   @override
