@@ -558,7 +558,15 @@ class _HomeScreenState extends State<HomepageWidget>
                   : 1,
               onPageChange: (int index) {
                 setState(() {
-                  if (homeController.searchText.isNotEmpty) {
+                  if (homeController.selectedNoPlaceTypeChoices.isNotEmpty) {
+                    homeController.noplaceTypeList(
+                        homeController.selectedNoPlaceTypeChoices,
+                        homeController.searchText,
+                        homeController.idCityToChoices.join(","),
+                        homeController.idCarTypeToChoices.join(","));
+                  } else if (homeController.searchText.isNotEmpty ||
+                      homeController.idCityToChoices.join(",").isNotEmpty ||
+                      homeController.idCarTypeToChoices.join(",").isNotEmpty) {
                     homeController.showLoading = true;
                     homeController.currentPage = index;
                     homeController.searchList(

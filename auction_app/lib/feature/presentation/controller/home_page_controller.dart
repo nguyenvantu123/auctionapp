@@ -136,12 +136,18 @@ class HomePageController extends FxController {
     update();
   }
 
-  void noplaceTypeList(
-      String id, String value, String tenTinh, String maLoai) async {
+  void noplaceTypeList(String selectedNoPlaceTypeChoices, String value,
+      String tenTinh, String maLoai) async {
     searchText = value;
     searchEditingController = TextEditingController(text: value);
     locationEditingController = TextEditingController();
     // await Future.delayed(const Duration(seconds: 1));
+
+    String id = noplacetypemodels!
+        .where((element) => element.ten == selectedNoPlaceTypeChoices)
+        .first
+        .ma;
+
     DataState<NoPlaceListModel> response;
     response = await homepageRepository.getNoplaceType(
         100, currentPage + 1, value, id, maLoai, "", "", "", tenTinh);
@@ -169,12 +175,7 @@ class HomePageController extends FxController {
     scaffoldKey.currentState?.openDrawer();
 
     if (selectedNoPlaceTypeChoices.isNotEmpty) {
-      String id = noplacetypemodels!
-          .where((element) => element.ten == selectedNoPlaceTypeChoices)
-          .first
-          .ma;
-
-      noplaceTypeList(id, searchEditingController.text,
+      noplaceTypeList(selectedNoPlaceTypeChoices, searchEditingController.text,
           idCityToChoices.join(","), idCarTypeToChoices.join(","));
     } else {
       for (var item in selectedCityChoices) {
@@ -218,6 +219,11 @@ class HomePageController extends FxController {
 
   void removeCityChoice(String item) {
     selectedCityChoices.remove(item);
+
+    String id =
+        citymodels!.where((element) => element.tenTinh == item).first.maTinh;
+
+    idCityToChoices.remove(id);
     update();
   }
 
@@ -228,6 +234,11 @@ class HomePageController extends FxController {
 
   void removeCarTypeChoice(String item) {
     selectedCarTypeChoices.remove(item);
+
+    String id =
+        cartypemodels!.where((element) => element.tenLoai == item).first.maLoai;
+
+    idCarTypeToChoices.remove(id);
     update();
   }
 
