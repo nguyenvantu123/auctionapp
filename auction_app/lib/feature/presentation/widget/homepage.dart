@@ -482,10 +482,12 @@ class _HomeScreenState extends State<HomepageWidget>
                   onFieldSubmitted: (value) {
                     setState(() {
                       homeController.showLoading = true;
-                      homeController.searchList(
-                          value,
-                          homeController.idCityToChoices.join(","),
-                          homeController.idCarTypeToChoices.join(","));
+
+                      homeController.getList();
+                      // homeController.searchList(
+                      //     value,
+                      //     homeController.idCityToChoices.join(","),
+                      //     homeController.idCarTypeToChoices.join(","));
                     });
                   },
                   controller: homeController.searchEditingController,
@@ -558,26 +560,27 @@ class _HomeScreenState extends State<HomepageWidget>
                   : 1,
               onPageChange: (int index) {
                 setState(() {
-                  if (homeController.selectedNoPlaceTypeChoices.isNotEmpty) {
-                    homeController.noplaceTypeList(
-                        homeController.selectedNoPlaceTypeChoices,
-                        homeController.searchText,
-                        homeController.idCityToChoices.join(","),
-                        homeController.idCarTypeToChoices.join(","));
-                  } else if (homeController.searchText.isNotEmpty ||
-                      homeController.idCityToChoices.join(",").isNotEmpty ||
-                      homeController.idCarTypeToChoices.join(",").isNotEmpty) {
-                    homeController.showLoading = true;
-                    homeController.currentPage = index;
-                    homeController.searchList(
-                        homeController.searchText,
-                        homeController.idCityToChoices.join(","),
-                        homeController.idCarTypeToChoices.join(","));
-                  } else {
-                    homeController.showLoading = true;
-                    homeController.currentPage = index;
-                    homeController.getList();
-                  }
+                  homeController.getList();
+                  // if (homeController.selectedNoPlaceTypeChoices.isNotEmpty) {
+                  //   homeController.noplaceTypeList(
+                  //       homeController.selectedNoPlaceTypeChoices,
+                  //       homeController.searchText,
+                  //       homeController.idCityToChoices.join(","),
+                  //       homeController.idCarTypeToChoices.join(","));
+                  // } else if (homeController.searchText.isNotEmpty ||
+                  //     homeController.idCityToChoices.join(",").isNotEmpty ||
+                  //     homeController.idCarTypeToChoices.join(",").isNotEmpty) {
+                  //   homeController.showLoading = true;
+                  //   homeController.currentPage = index;
+                  //   homeController.searchList(
+                  //       homeController.searchText,
+                  //       homeController.idCityToChoices.join(","),
+                  //       homeController.idCarTypeToChoices.join(","));
+                  // } else {
+                  //   homeController.showLoading = true;
+                  //   homeController.currentPage = index;
+                  //   homeController.getList();
+                  // }
                 });
               },
             )

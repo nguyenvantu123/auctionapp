@@ -90,31 +90,20 @@ class HomePageController extends FxController {
     searchEditingController = TextEditingController();
     locationEditingController = TextEditingController();
     // await Future.delayed(const Duration(seconds: 1));
-
-    var response = await homepageRepository.getDataList(100, currentPage + 1);
-
-    if (response is DataSuccess) {
-      noplaces = response.data?.listViewBienSo;
-
-      totalItem = response.data?.rowCout;
-
-      numPage = response.data?.pageCount;
-    }
-    // noplaces = await NoPlaceModel.getDummyList();
-
-    showLoading = false;
-    uiLoading = false;
-
-    update();
-  }
-
-  void searchList(String value, String tenTinh, String maLoai) async {
-    searchText = value;
-    searchEditingController = TextEditingController(text: value);
-    locationEditingController = TextEditingController();
-    // await Future.delayed(const Duration(seconds: 1));
     DataState<NoPlaceListModel> response;
-    if (value.isEmpty && tenTinh.isEmpty && maLoai.isEmpty) {
+
+    String value = searchEditingController.text;
+    String tenTinh = idCityToChoices.join(",");
+    String maLoai = idCarTypeToChoices.join(",");
+
+    String id = noplacetypemodels!
+        .where((element) => element.ten == selectedNoPlaceTypeChoices)
+        .first
+        .ma;
+    if (id.isNotEmpty) {
+      response = await homepageRepository.getNoplaceType(
+          100, currentPage + 1, value, id, maLoai, "", "", "", tenTinh);
+    } else if (value.isEmpty && tenTinh.isEmpty && maLoai.isEmpty) {
       response = await homepageRepository.getDataList(100, currentPage + 1);
     } else {
       response = await homepageRepository.searchDataList(
@@ -128,38 +117,6 @@ class HomePageController extends FxController {
 
       numPage = response.data?.pageCount;
     }
-    // noplaces = await NoPlaceModel.getDummyList();
-
-    showLoading = false;
-    uiLoading = false;
-
-    update();
-  }
-
-  void noplaceTypeList(String selectedNoPlaceTypeChoices, String value,
-      String tenTinh, String maLoai) async {
-    searchText = value;
-    searchEditingController = TextEditingController(text: value);
-    locationEditingController = TextEditingController();
-    // await Future.delayed(const Duration(seconds: 1));
-
-    String id = noplacetypemodels!
-        .where((element) => element.ten == selectedNoPlaceTypeChoices)
-        .first
-        .ma;
-
-    DataState<NoPlaceListModel> response;
-    response = await homepageRepository.getNoplaceType(
-        100, currentPage + 1, value, id, maLoai, "", "", "", tenTinh);
-
-    if (response is DataSuccess) {
-      noplaces = response.data?.listViewBienSo;
-
-      totalItem = response.data?.rowCout;
-
-      numPage = response.data?.pageCount;
-    }
-    // noplaces = await NoPlaceModel.getDummyList();
 
     showLoading = false;
     uiLoading = false;
@@ -174,31 +131,7 @@ class HomePageController extends FxController {
   void closeEndDrawer() {
     scaffoldKey.currentState?.openDrawer();
 
-    if (selectedNoPlaceTypeChoices.isNotEmpty) {
-      noplaceTypeList(selectedNoPlaceTypeChoices, searchEditingController.text,
-          idCityToChoices.join(","), idCarTypeToChoices.join(","));
-    } else {
-      for (var item in selectedCityChoices) {
-        String id = citymodels!
-            .where((element) => element.tenTinh == item)
-            .first
-            .maTinh;
-
-        idCityToChoices.add(id);
-      }
-
-      for (var item in selectedCarTypeChoices) {
-        String id = cartypemodels!
-            .where((element) => element.tenLoai == item)
-            .first
-            .maLoai;
-
-        idCarTypeToChoices.add(id);
-      }
-
-      searchList(searchEditingController.text, idCityToChoices.join(","),
-          idCarTypeToChoices.join(","));
-    }
+    getList();
   }
 
   void clearDrawer() {
