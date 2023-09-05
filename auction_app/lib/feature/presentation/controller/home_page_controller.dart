@@ -35,16 +35,18 @@ class HomePageController extends FxController {
   List<CarTypeModel>? cartypemodels = [];
   List<NoPlaceTypeModel> noplacetypemodels = [];
 
-  List<String> idCityToChoices = [];
+  // List<String> idCityToChoices = [];
   List<String> selectedCityChoices = [];
 
-  List<String> idCarTypeToChoices = [];
+  // List<String> idCarTypeToChoices = [];
   List<String> selectedCarTypeChoices = [];
 
   String idNoPlaceTypeToChoices = "";
   String selectedNoPlaceTypeChoices = "";
 
   String status = "Unfavorite";
+
+  String value = "";
 
   HashMap<String, String> indexChoose = HashMap<String, String>();
 
@@ -92,14 +94,28 @@ class HomePageController extends FxController {
     // await Future.delayed(const Duration(seconds: 1));
     DataState<NoPlaceListModel> response;
 
-    String value = searchEditingController.text;
-    String tenTinh = idCityToChoices.join(",");
-    String maLoai = idCarTypeToChoices.join(",");
+    searchEditingController.text = value;
 
-    String id = noplacetypemodels!
-        .where((element) => element.ten == selectedNoPlaceTypeChoices)
-        .first
-        .ma;
+    String tenTinh = citymodels!
+        .where((element) => selectedCityChoices.contains(element.tenTinh))
+        .toList()
+        .map((element) => element.maTinh)
+        .join(",");
+
+    String maLoai = cartypemodels!
+        .where((element) => selectedCarTypeChoices.contains(element.tenLoai))
+        .toList()
+        .map((element) => element.maLoai)
+        .join(",");
+
+    String id = "";
+    if (selectedNoPlaceTypeChoices.isNotEmpty) {
+      id = noplacetypemodels
+          .where((element) => element.ten == selectedNoPlaceTypeChoices)
+          .first
+          .ma;
+    }
+
     if (id.isNotEmpty) {
       response = await homepageRepository.getNoplaceType(
           100, currentPage + 1, value, id, maLoai, "", "", "", tenTinh);
@@ -136,10 +152,10 @@ class HomePageController extends FxController {
 
   void clearDrawer() {
     selectedCityChoices = [];
-    idCityToChoices = [];
+    // idCityToChoices = [];
 
     selectedCarTypeChoices = [];
-    idCarTypeToChoices = [];
+    // idCarTypeToChoices = [];
 
     selectedNoPlaceTypeChoices = "";
     update();
@@ -153,10 +169,10 @@ class HomePageController extends FxController {
   void removeCityChoice(String item) {
     selectedCityChoices.remove(item);
 
-    String id =
-        citymodels!.where((element) => element.tenTinh == item).first.maTinh;
+    // String id =
+    //     citymodels!.where((element) => element.tenTinh == item).first.maTinh;
 
-    idCityToChoices.remove(id);
+    // idCityToChoices.remove(id);
     update();
   }
 
@@ -168,10 +184,10 @@ class HomePageController extends FxController {
   void removeCarTypeChoice(String item) {
     selectedCarTypeChoices.remove(item);
 
-    String id =
-        cartypemodels!.where((element) => element.tenLoai == item).first.maLoai;
+    // String id =
+    //     cartypemodels!.where((element) => element.tenLoai == item).first.maLoai;
 
-    idCarTypeToChoices.remove(id);
+    // idCarTypeToChoices.remove(id);
     update();
   }
 

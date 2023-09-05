@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomepageWidget>
   Widget _endDrawer() {
     return SafeArea(
       child: Container(
-        margin: FxSpacing.fromLTRB(16, 16, 50, 80),
+        margin: FxSpacing.fromLTRB(16, 16, 30, 80),
         width: 300,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -482,7 +482,7 @@ class _HomeScreenState extends State<HomepageWidget>
                   onFieldSubmitted: (value) {
                     setState(() {
                       homeController.showLoading = true;
-
+                      homeController.value = value;
                       homeController.getList();
                       // homeController.searchList(
                       //     value,
@@ -561,26 +561,6 @@ class _HomeScreenState extends State<HomepageWidget>
               onPageChange: (int index) {
                 setState(() {
                   homeController.getList();
-                  // if (homeController.selectedNoPlaceTypeChoices.isNotEmpty) {
-                  //   homeController.noplaceTypeList(
-                  //       homeController.selectedNoPlaceTypeChoices,
-                  //       homeController.searchText,
-                  //       homeController.idCityToChoices.join(","),
-                  //       homeController.idCarTypeToChoices.join(","));
-                  // } else if (homeController.searchText.isNotEmpty ||
-                  //     homeController.idCityToChoices.join(",").isNotEmpty ||
-                  //     homeController.idCarTypeToChoices.join(",").isNotEmpty) {
-                  //   homeController.showLoading = true;
-                  //   homeController.currentPage = index;
-                  //   homeController.searchList(
-                  //       homeController.searchText,
-                  //       homeController.idCityToChoices.join(","),
-                  //       homeController.idCarTypeToChoices.join(","));
-                  // } else {
-                  //   homeController.showLoading = true;
-                  //   homeController.currentPage = index;
-                  //   homeController.getList();
-                  // }
                 });
               },
             )
